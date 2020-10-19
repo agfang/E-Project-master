@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 12, 2020 lúc 04:57 PM
--- Phiên bản máy phục vụ: 10.4.11-MariaDB
--- Phiên bản PHP: 7.2.31
+-- Host: 127.0.0.1
+-- Generation Time: Oct 19, 2020 at 10:35 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,38 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `eproject1`
+-- Database: `eproject1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `order`
---
-
-CREATE TABLE `order` (
-  `OrderID` char(250) NOT NULL,
-  `UserID` char(250) NOT NULL,
-  `Address` text NOT NULL,
-  `Phone` varchar(250) NOT NULL,
-  `Time` datetime NOT NULL,
-  `Status` char(250) NOT NULL,
-  `Payment` varchar(250) NOT NULL,
-  `TotalAmount` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `order`
---
-
-INSERT INTO `order` (`OrderID`, `UserID`, `Address`, `Phone`, `Time`, `Status`, `Payment`, `TotalAmount`) VALUES
-('SOF1602485858', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:57:38', 'Shipping', 'Cash', 338.8),
-('SOF1602485997', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `orderdetail`
+-- Table structure for table `orderdetail`
 --
 
 CREATE TABLE `orderdetail` (
@@ -60,7 +35,7 @@ CREATE TABLE `orderdetail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `orderdetail`
+-- Dumping data for table `orderdetail`
 --
 
 INSERT INTO `orderdetail` (`OrderID`, `ProductID`, `Price`, `Quantity`) VALUES
@@ -73,7 +48,61 @@ INSERT INTO `orderdetail` (`OrderID`, `ProductID`, `Price`, `Quantity`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `OrderID` char(250) NOT NULL,
+  `UserID` char(250) NOT NULL,
+  `Address` text NOT NULL,
+  `Phone` varchar(250) NOT NULL,
+  `CreateTime` datetime NOT NULL,
+  `OrderStatus` char(250) NOT NULL,
+  `Payment` varchar(250) NOT NULL,
+  `TotalPrice` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`OrderID`, `UserID`, `Address`, `Phone`, `CreateTime`, `OrderStatus`, `Payment`, `TotalPrice`) VALUES
+('SOF1602485198', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
+('SOF1602485858', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:57:38', 'Cancel', 'Cash', 338.8),
+('SOF1602485898', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Cancel', 'Cash', 7.7),
+('SOF1602485968', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Cancel', 'Cash', 7.7),
+('SOF1602485991', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7),
+('SOF1602485992', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
+('SOF1602485993', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Cancel', 'Cash', 7.7),
+('SOF1602485994', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7),
+('SOF1602485995', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
+('SOF1602485996', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7),
+('SOF1602485997', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
+('SOF1602485998', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
+('SOF1602485999', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `orderview`
+-- (See below for the actual view)
+--
+CREATE TABLE `orderview` (
+`OrderID` char(250)
+,`FirstName` varchar(250)
+,`LastName` varchar(250)
+,`Address` text
+,`Phone` varchar(250)
+,`CreateTime` datetime
+,`OrderStatus` char(250)
+,`Payment` varchar(250)
+,`TotalPrice` float
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -88,27 +117,16 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`ProductID`, `ProductName`, `Price`, `Discount`, `Amount`, `Description`, `Category`, `Image`) VALUES
-('D1', 'Garlic', 10, 0.3, 499, 'hahhhhhhhhhh', 'Dried', 'images/product-11.jpg'),
-('F1', 'Strawberry', 120, 0.1, 99, 'haaaaaaaaaaaaaaaaa', 'Fruits', 'images/product-2.jpg'),
-('F2', 'TOMATOE', 80, 0.1, 500, 'Tomatoe is fruits', 'Fruits', 'images/product-5.jpg'),
-('F3', 'APPLE', 140, 0.15, 1000, 'oishi', 'Fruits', 'images/product-10.jpg'),
-('J1', 'Apple Juice', 30, 0, 98, 'cccccccccccccccccccccccccc', 'Juice', 'images/product-8.jpg'),
-('V1', 'Bell Pepper', 120, 0, 9, 'scssssssssssssssssssss', 'Vegetables', 'images/product-1.jpg'),
-('V2', 'Green Beans', 80, 0.5, 200, 'scccccccccccccccccccccc', 'Vegetables', 'images/product-3.jpg'),
-('V3', 'Chilli', 20, 0, 4, 'ssssssssssssssssssssssssssss', 'Vegetables', 'images/product-12.jpg'),
-('V4', 'PURPLE CABBAGE', 120, 0, 50, 'PPPPPPPPPPPP', 'Vegetables', 'images/product-4.jpg'),
-('V5', 'BROCOLLI', 120, 0.2, 300, 'BROCOLLI is ..', 'Vegetables', 'images/product-6.jpg'),
-('V6', 'CARROTS', 100, 0.4, 1000, 'CARROTS is vegetables', 'Vegetables', 'images/product-7.jpg'),
-('V7', 'ONION', 80, 0.3, 400, 'i dont know', 'Vegetables', 'images/product-9.jpg');
+('F20201019093050', 'nho', 100000, 0.5, 100, 'aaaaaaaaaaaaaaa', 'Fruits', '../../utilities/media/nho2020-10-19.png');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -124,37 +142,40 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`UserID`, `UserName`, `FirstName`, `LastName`, `Password`, `Phone`, `Mail`, `Address`, `Avatar`) VALUES
 ('USER1602476009', 'ledung', 'Lê', 'Dũng', '202cb962ac59075b964b07152d234b70', '123', 'ledung@gmail.com', '36 hoang cau, ha noi', NULL),
 ('USER1602476675', 'dungle', NULL, NULL, 'caf1a3dfb505ffed0d024130f58c5cfa', NULL, NULL, NULL, NULL);
 
+-- --------------------------------------------------------
+
 --
--- Chỉ mục cho các bảng đã đổ
+-- Structure for view `orderview`
+--
+DROP TABLE IF EXISTS `orderview`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orderview`  AS  select `orders`.`OrderID` AS `OrderID`,`users`.`FirstName` AS `FirstName`,`users`.`LastName` AS `LastName`,`orders`.`Address` AS `Address`,`orders`.`Phone` AS `Phone`,`orders`.`CreateTime` AS `CreateTime`,`orders`.`OrderStatus` AS `OrderStatus`,`orders`.`Payment` AS `Payment`,`orders`.`TotalPrice` AS `TotalPrice` from (`orders` join `users`) where `orders`.`UserID` = `users`.`UserID` ;
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `order`
---
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`OrderID`);
-
---
--- Chỉ mục cho bảng `orderdetail`
+-- Indexes for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
   ADD PRIMARY KEY (`OrderID`,`ProductID`);
 
 --
--- Chỉ mục cho bảng `products`
+-- Indexes for table `orders`
 --
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`ProductID`);
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`OrderID`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`UserID`);

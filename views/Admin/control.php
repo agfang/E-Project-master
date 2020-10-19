@@ -69,7 +69,7 @@
         else if ($action =='updateStatus'){
           $id=$_POST['id'];
           $status=$_POST['status'];
-          $sqlCmd ="UPDATE `eproject1`.`order` SET `OrderStatus` = '$status' WHERE (`OrderID` = '$id');";
+          $sqlCmd ="UPDATE `eproject1`.`orders` SET `OrderStatus` = '$status' WHERE (`OrderID` = '$id');";
           $response = mysqli_query($conn,$sqlCmd);
           echo $response ;
         }
@@ -83,7 +83,7 @@
         }
     }
 
-  // Get REQUEST_METHOD
+// Get REQUEST_METHOD
     if($_SERVER['REQUEST_METHOD']=='GET'){
       $action = $_GET['action'];
       $sqlCmd ='';
@@ -117,7 +117,16 @@
           array_push($data,$row);
         }
       }
-     
+      else if($action == 'getOrderItems'){
+        if(isset($_GET['id']) && $_GET['id'] != ''){
+          $id = $_GET['id'];
+        $sqlCmd="SELECT * FROM eproject1.oderitemsview WHERE OrderID = '$id';";
+        }
+        $result = mysqli_query($conn,$sqlCmd); 
+        while ($row = mysqli_fetch_assoc($result)) {
+          array_push($data,$row);
+        }
+      }
     $jsonData = json_encode($data);
     echo $jsonData;
   }

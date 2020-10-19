@@ -30,7 +30,7 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-active-color="rose" data-background-color="white" data-image="">
+        <div class="sidebar" data-active-color="rose" data-background-color="white" data-image="" id="sideBar">
             <!--
         Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
         Tip 2: you can also add an image using data-image tag
@@ -38,7 +38,7 @@
     -->
             <div class="logo">
                 <a href="./index.php" class="simple-text">
-                    START ORGANIC
+                    STAR ORGANIC
                 </a>
             </div>
             <div class="logo logo-mini">

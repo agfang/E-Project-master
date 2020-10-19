@@ -96,7 +96,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"> Product Manage </a>
+                        <a class="navbar-brand" href="#"> Orders Manage </a>
                     </div>
 
                 </div>
@@ -110,7 +110,7 @@
                                     <i class="material-icons">assignment</i>
                                 </div>
                                 <div class="card-content">
-                                    <h4 class="card-title">Product Tables</h4>
+                                    <h4 class="card-title">Orders Tables</h4>
                                     <div class="toolbar">
                                         <!--        Here you can write extra buttons/actions for the toolbar              -->
                                     </div>
@@ -119,6 +119,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
+                                                    <th>Items</th>
                                                     <th>Name</th>
                                                     <th>Address</th>
                                                     <th>Phone</th>
@@ -126,7 +127,7 @@
                                                     <th>Status</th>
                                                     <th>Payment</th>
                                                     <th>Total Price</th>
-                                                    <th class="disabled-sorting text-right">Actions</th>
+                                                    <th class="disabled-sorting ">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -234,7 +235,36 @@
       </div>
     </div>
   </div>
-
+<!-- MODAL items -->
+<div class="modal fade" id="itemsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="card card-signup card-plain">
+          <div class="modal-header">
+            <div class="card-header card-header-danger text-center">
+                <h4 class="card-title">Order Items </h4>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+            <div class="material-datatables">
+                <table id="itemsTables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- MODAL END -->
 </body>
 <!--   Core JS Files   -->
@@ -289,6 +319,9 @@
         $('#datatables tbody').append(`
         <tr>
           <td>${data[i]["OrderID"]}</td>
+          <td>
+            <a href="#" class="btn btn-simple btn-info btn-icon item" data-toggle="modal" data-target="#itemsModal"><i class="material-icons">list_alt</i></a>
+          </td>
           <td>${data[i]["FirstName"]} ${data[i]["LastName"]}</td>
           <td >${data[i]["Address"]}</td>
           <td>${data[i]["Phone"]}</td>
@@ -303,7 +336,7 @@
         </tr>`);
         }
     }
-    function get_record(id)
+    function get_record(id,action)
     {
         $.ajax(
             {
@@ -312,7 +345,7 @@
                 async: false,
                 data:{
                     "id": id, 
-                    "action": "getOrderRecord", 
+                    "action": action, 
                 },
                 success: function(data)
                 {
@@ -344,7 +377,7 @@
         return status;
     }
     $(document).ready(function() {
-        get_record();
+        get_record("","getOrderRecord");
         createTable(datasource);
 
         $('#datatables').DataTable({
@@ -367,7 +400,7 @@
             var data = table.row($tr).data();
             selectedRow  = table.row($tr).index();
             var tempDiv = document.createElement('div');
-            tempDiv.innerHTML=data[5];
+            tempDiv.innerHTML=data[6];
             console.log(tempDiv.innerText);
             var status = nextStatus(tempDiv.innerText);
             $("#orderUpdatedId").val(data[0]);
@@ -390,11 +423,11 @@
 				success:function(data)
 				{
 					if(data == 1){
-                        get_record($("#orderUpdatedId").val());
+                        get_record($("#orderUpdatedId").val(),"getOrderRecord");
                         demo.showSwal('success-message');
                         $('#closeUpdate').trigger('click');
                         var newStatus=setStatusLabel(datasource[0]["OrderStatus"])
-                        table.cell({row:selectedRow, column:5}).data( newStatus ).draw(false);
+                        table.cell({row:selectedRow, column:6}).data( newStatus ).draw(false);
                     }
                     else if (data == 0){
                         demo.showSwal('error');
@@ -430,12 +463,12 @@
 				success:function(data)
 				{
 					if(data == 1){
-                        get_record($("#cancelOrderId").val());
+                        get_record($("#orderUpdatedId").val(),"getOrderRecord");
                         demo.showSwal('success-message');
                         $('#closeCancel').trigger('click');
                         var newStatus=setStatusLabel(datasource[0]["OrderStatus"])
                         console.log(newStatus);
-                        table.cell({row:selectedRow, column:5}).data( newStatus ).draw(false);
+                        table.cell({row:selectedRow, column:6}).data( newStatus ).draw(false);
                     }
                     else {
                         demo.showSwal('error');
@@ -447,6 +480,24 @@
 			});
         });
 
+        table.on('click', '.item', function(e) {
+            $('#itemsTables tbody').empty();
+            $tr = $(this).closest('tr');
+            var data = table.row($tr).data();
+            var id = data[0];
+            get_record(id,"getOrderItems");
+            for (var i = 0; i < datasource.length;i++){
+                $('#itemsTables tbody').append(`
+                <tr>
+                  <td>${datasource[i]["OrderID"]}</td>
+                  <td>${datasource[i]["ProductName"]}</td>
+                  <td>${datasource[i]["Price"]}</td>
+                  <td>${datasource[i]["Quantity"]}</td>
+                </tr>`);
+                }
+            
+        });
+        
         $('.card .material-datatables label').addClass('form-group');
     });
 </script>
