@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2020 at 10:35 AM
+-- Generation Time: Oct 19, 2020 at 12:11 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `eproject1`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `oderitemsview`
+-- (See below for the actual view)
+--
+CREATE TABLE `oderitemsview` (
+`OrderID` varchar(250)
+,`Price` float
+,`Quantity` int(11)
+,`ProductName` varchar(250)
+);
 
 -- --------------------------------------------------------
 
@@ -43,6 +56,7 @@ INSERT INTO `orderdetail` (`OrderID`, `ProductID`, `Price`, `Quantity`) VALUES
 ('SOF1602485858', 'J1', 30, 2),
 ('SOF1602485858', 'V1', 120, 1),
 ('SOF1602485858', 'V3', 20, 1),
+('SOF1602485968', 'F20201019093050', 50000, 5),
 ('SOF1602485997', 'D1', 7, 1);
 
 -- --------------------------------------------------------
@@ -67,11 +81,11 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`OrderID`, `UserID`, `Address`, `Phone`, `CreateTime`, `OrderStatus`, `Payment`, `TotalPrice`) VALUES
-('SOF1602485198', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
+('SOF1602485198', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7),
 ('SOF1602485858', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:57:38', 'Cancel', 'Cash', 338.8),
 ('SOF1602485898', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Cancel', 'Cash', 7.7),
 ('SOF1602485968', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Cancel', 'Cash', 7.7),
-('SOF1602485991', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7),
+('SOF1602485991', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Cancel', 'Cash', 7.7),
 ('SOF1602485992', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
 ('SOF1602485993', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Cancel', 'Cash', 7.7),
 ('SOF1602485994', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7),
@@ -79,7 +93,7 @@ INSERT INTO `orders` (`OrderID`, `UserID`, `Address`, `Phone`, `CreateTime`, `Or
 ('SOF1602485996', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7),
 ('SOF1602485997', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
 ('SOF1602485998', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Waiting', 'Cash', 7.7),
-('SOF1602485999', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Shipping', 'Cash', 7.7);
+('SOF1602485999', 'USER1602476009', '36 hoang cau, ha noi', '123', '2020-10-12 08:59:57', 'Cancel', 'Cash', 7.7);
 
 -- --------------------------------------------------------
 
@@ -111,7 +125,7 @@ CREATE TABLE `products` (
   `Price` float NOT NULL,
   `Discount` float NOT NULL,
   `Amount` int(11) NOT NULL,
-  `Description` text NOT NULL,
+  `Description` text DEFAULT NULL,
   `Category` varchar(250) NOT NULL,
   `Image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -152,6 +166,15 @@ INSERT INTO `users` (`UserID`, `UserName`, `FirstName`, `LastName`, `Password`, 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `oderitemsview`
+--
+DROP TABLE IF EXISTS `oderitemsview`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `oderitemsview`  AS  select `orderdetail`.`OrderID` AS `OrderID`,`orderdetail`.`Price` AS `Price`,`orderdetail`.`Quantity` AS `Quantity`,`products`.`ProductName` AS `ProductName` from (`orderdetail` join `products`) where `orderdetail`.`ProductID` = `products`.`ProductID` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `orderview`
 --
 DROP TABLE IF EXISTS `orderview`;
@@ -173,6 +196,12 @@ ALTER TABLE `orderdetail`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`ProductID`);
 
 --
 -- Indexes for table `users`
