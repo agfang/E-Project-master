@@ -4,13 +4,16 @@
     include '../../utilities/connectToDatabase.php';
 // Post REQUEST_METHOD
     if($_SERVER['REQUEST_METHOD']=='POST'){
+        $discount = 0;
         $action = $_POST['action'];
         if($action =='create'){
             $prodName= $_POST['name'];
             $prodAmount=$_POST['amount'];
             $prodDesc=$_POST['desc'];
             $prodPrice=$_POST['price'];
-            $discount=$_POST['discount'];
+            if(isset($_POST['discount'])){
+              $discount=$_POST['discount'];
+            }
             $prodType=$_POST['prodType'];
             $idProd = mb_substr($prodType, 0, 1, "UTF-8").date("YmdHis");
             if(isset($_FILES['inputImg'])){
@@ -19,9 +22,8 @@
                 $newFileName = str_replace(' ','',$prodName).date('Y-m-d').'.png';
                 move_uploaded_file($_FILES['inputImg']['tmp_name'], '../../utilities/media/' . $newFileName);
                 $path='../../utilities/media/' . $newFileName;
-                $sqlCmd="INSERT INTO `eproject1`.`products` (`ProductID`, `ProductName`, `Price`,`Discount` `Amount`, `Description`, `Category`, `Image`) 
-                VALUES ('$idProd', '$prodName', '$prodPrice', $discount, '$prodAmount', '$prodDesc', '$prodType', '$path')";
-                $sqlGetCmd="SELECT * FROM eproject1.products;";
+                $sqlCmd="INSERT INTO `products` (`ProductID`, `ProductName`, `Price`, `Discount`, `Amount`, `Description`, `Category`, `Image`) 
+                          VALUES ('$idProd', '$prodName', $prodPrice, $discount,  $prodAmount, '$prodDesc', '$prodType', '$path')";
                 $response = mysqli_query($conn,$sqlCmd);
                 echo $response;
               }
@@ -33,6 +35,9 @@
             $prodAmount=$_POST['amount'];
             $prodDesc=$_POST['desc'];
             $prodPrice=$_POST['price'];
+            if(isset($_POST['discount'])){
+              $discount=$_POST['discount'];
+            }
             $prodType=$_POST['prodType'];
             if(isset($_FILES['inputImg'])){
               if($_FILES['inputImg']['error']== 0 && $_FILES["inputImg"]["size"] > 0)
@@ -41,7 +46,7 @@
                 move_uploaded_file($_FILES['inputImg']['tmp_name'], '../../utilities/media/' . $newFileName);
                 $path='../../utilities/media/' . $newFileName;
                 $sqlCmd="UPDATE `eproject1`.`products` 
-                SET `ProductName` = '$prodName', `Price` = '$prodPrice', `Amount` = '$prodAmount', `Description` = '$prodDesc', `Category` = '$prodType', `Image` = ' $path' 
+                SET `ProductName` = '$prodName', `Price` = '$prodPrice', `Discount` = '$discount',`Amount` = '$prodAmount', `Description` = '$prodDesc', `Category` = '$prodType', `Image` = ' $path' 
                 WHERE (`ProductID` = '$prodId');";
                 $response = mysqli_query($conn,$sqlCmd);
                 echo $response;
@@ -49,7 +54,7 @@
             }
             else{
               $sqlCmd="UPDATE `eproject1`.`products` 
-              SET `ProductName` = '$prodName', `Price` = '$prodPrice', `Amount` = '$prodAmount', `Description` = '$prodDesc', `Category` = '$prodType'
+              SET `ProductName` = '$prodName', `Price` = '$prodPrice', `Discount` = '$discount',`Amount` = '$prodAmount', `Description` = '$prodDesc', `Category` = '$prodType'
               WHERE (`ProductID` = '$prodId');";
               $response = mysqli_query($conn,$sqlCmd);
               echo $response;

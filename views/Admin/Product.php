@@ -121,8 +121,9 @@
                                                     <th>ID</th>
                                                     <th>Name</th>
                                                     <th>image</th>
-                                                    <th>Amount</th>
                                                     <th>Price</th>
+                                                    <th>Discount</th>
+                                                    <th>Amount</th>
                                                     <th>Type</th>
                                                     <th>Description</th>
                                                     <th class="disabled-sorting text-right">Actions</th>
@@ -187,7 +188,7 @@
       <div class="modal-dialog " role="document">
           <div class="modal-content">
             <div class="card card-signup">
-                <form id="editProduct" class="form-horizontal  form-edit" action="#" method="post" enctype="multipart/form-data">
+                <form id="editProduct" class="form-edit" action="#" method="post" enctype="multipart/form-data">
                     <div class="card-header card-header-icon" data-background-color="orange">
                         <i class="material-icons">edit</i>
                     </div>
@@ -200,6 +201,9 @@
                             </div>
                             <div class="form-group ">
                                 <input class="form-control" id="price" type="number" required="true" placeholder="Price"/>
+                            </div>
+                            <div class="form-group ">
+                                <input class="form-control" id="discount" type="text" required="true" placeholder="Discount"/>
                             </div>
                             <div class="form-group ">
                                 <input class="form-control" id="amount" type="number" required="true" placeholder="Amount"/>
@@ -367,8 +371,9 @@
           <td >
               <a href="#" class="btn btn-simple btn-info btn-icon img" name="${data[i]['Image']}" data-toggle="modal" data-target="#imageModal"><i class="material-icons">collections</i></a>
           </td>
-          <td>${data[i]["Amount"]}</td>
           <td>${data[i]["Price"]}</td>
+          <td>${data[i]["Discount"]}</td>
+          <td>${data[i]["Amount"]}</td>
           <td>${data[i]["Category"]}</td>
           <td>${data[i]["Description"]}</td>
           <td>
@@ -421,13 +426,14 @@
             selectedRow  = table.row($tr).index();
             $("#prodUpdatedId").val(data[0]);
             $("#name").val(data[1]);
-            $("#amount").val(data[3]);
-            $("#price").val(data[4]);
-            $("#desc").val(data[6]);
+            $("#price").val(data[3]);
+            $("#discount").val(data[4]);
+            $("#amount").val(data[5]);
+            $("#desc").val(data[7]);
             $("#productImg").attr("src",data[2].substr(63, data[2].length).split("png")[0]+"png");
             var radios = document.getElementsByName("prodType");
             for (var i = 0; i < radios.length; i++) {
-            if(radios[i].getAttribute("value") == data[5]){
+            if(radios[i].getAttribute("value") == data[6]){
                 radios[i].checked=true;
                 break;
             }
@@ -440,6 +446,7 @@
             var file_data = $('#inputImg').prop('files')[0]; 
             var name = $("#name").val();
             var price = $("#price").val();
+            var discount = $("#discount").val();
             var amount = $("#amount").val();
             var desc = $("#desc").val();
             var prodType = $("input[name='prodType']:checked").val();
@@ -448,6 +455,7 @@
             formData.append('inputImg', file_data);
             formData.append('name', name);
             formData.append('price', price);
+            formData.append('discount', discount);
             formData.append('amount', amount);
             formData.append('desc', desc);
             formData.append('prodType', prodType);
@@ -465,8 +473,9 @@
                         console.log(datasource);
                         var newData = [datasource[0]["ProductID"],datasource[0]["ProductName"],
                                     `<a href="#" class="btn btn-simple btn-info btn-icon img" name="${datasource[0]['Image']}" data-toggle="modal" data-target="#imageModal"><i class="material-icons">collections</i></a>`,
-                                    datasource[0]["Amount"],
                                     datasource[0]["Price"],
+                                    datasource[0]["Discount"],
+                                    datasource[0]["Amount"],
                                     datasource[0]["Category"],
                                     datasource[0]["Description"],
                                     `<a href="#" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#editModal"><i class="material-icons">edit</i></a>

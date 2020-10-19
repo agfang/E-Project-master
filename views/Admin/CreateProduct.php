@@ -22,8 +22,9 @@
     <link href="../../templates/dashboard/assets/css/font-awesome.css" rel="stylesheet" />
     <link href="../../templates/dashboard/assets/css/google-roboto-300-700.css" rel="stylesheet" />
     <style>
-        .control-label{position:0};
-
+        .form-group.label-floating{
+            margin-top:10px;
+        }
     </style>
 </head>
 
@@ -110,7 +111,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-                                <form id="createProduct" class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                                <form id="createProduct"  action="#" method="post" enctype="multipart/form-data">
                                     <div class="card-header card-header-icon" data-background-color="purple">
                                         <i class="material-icons">playlist_add</i>
                                     </div>
@@ -127,7 +128,7 @@
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Discount<small>*</small></label>
-                                                <input class="form-control" id="discount" type="number"  value="0"/>
+                                                <input class="form-control" id="discount" type="text" />
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Amount<small>*</small></label>
@@ -199,41 +200,6 @@
                     <!-- end row -->
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <p class="copyright pull-right">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
-                        <a href="http://www.creative-tim.com/">Creative Tim</a>, made with love for a better web
-                    </p>
-                </div>
-            </footer>
         </div>
     </div>
 </body>
@@ -293,7 +259,7 @@
         setFormValidation('#createProduct');
 
         $('#createProduct').on('submit', function(event){
-            //event.preventDefault();
+            event.preventDefault();
             var file_data = $('#inputImg').prop('files')[0]; 
             var name = $("#name").val();
             var price = $("#price").val();
@@ -316,6 +282,7 @@
 				data:formData,
 				success:function(data)
 				{
+                    console.log(data);
 					if(data == 1){
                         demo.showSwal('success-message');
                         $("#reset").click();
