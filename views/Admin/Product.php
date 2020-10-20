@@ -21,6 +21,7 @@
     <!--     Fonts and icons     -->
     <link href="../../templates/dashboard/assets/css/font-awesome.css" rel="stylesheet" />
     <link href="../../templates/dashboard/assets/css/google-roboto-300-700.css" rel="stylesheet" />
+    <link href="../../utilities/AdminStyle.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -422,9 +423,7 @@
 				{
 					if(data == 1){
                         get_record();
-                        demo.showSwal('success-message');
-                        $('#closeEdit').trigger('click');
-                        console.log(datasource);
+                        //demo.showSwal('success-message');
                         var newData = [datasource[0]["ProductID"],datasource[0]["ProductName"],
                                     `<a href="#" class="btn btn-simple btn-info btn-icon img" name="${datasource[0]['Image']}" data-toggle="modal" data-target="#imageModal"><i class="material-icons">collections</i></a>`,
                                     datasource[0]["Price"],
@@ -436,6 +435,7 @@
                                     <a href="#" class="btn btn-simple btn-danger btn-icon remove" data-toggle="modal" data-target="#deleteModal"><i class="material-icons">close</i></a>`
                                     ];
                         table.row(selectedRow).data( newData ).draw(false);
+                        $('#closeEdit').trigger('click');
                     }
                     else if (data == 0){
                         demo.showSwal('error');
@@ -492,9 +492,6 @@
             $("#gallery").attr('src',data[2].substr(63, data[2].length).split("png")[0]+"png");
         });
 
-        
-
-        
         $('.card .material-datatables label').addClass('form-group');
     });
 </script>

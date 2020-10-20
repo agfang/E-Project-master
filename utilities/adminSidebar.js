@@ -57,10 +57,10 @@ function createSideBar() {
 </div>`
   )
 }
+
 function setActiveTab(){
   var href = document.location.href;
   var lastPathSegment = href.substr(href.lastIndexOf('/'));
-  console.log(lastPathSegment)
   if(lastPathSegment=="/"){
     $('.nav-item')[0].setAttribute('class','nav-item active');
   }
@@ -71,10 +71,32 @@ function setActiveTab(){
     }
   });
 }
+
 $(document).ready(function() {
+  $("body").append(`
+  <div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+  </div>
+  ` )
+
   createSideBar();
   setActiveTab();
   $("#Logout").click(function(){
     sessionStorage.removeItem('loginsuccess');
   })
+//Show loading when call ajax function
+  $(document).ajaxStart(function()
+  {
+      console.log(1)
+      $(".loader-wrapper").fadeIn();
+  });
+  $(document).ajaxComplete(function()
+  {
+      console.log(2)
+      $(".loader-wrapper").fadeOut();
+  });
 })
+//Show loading page
+$(window).on("load",function(){
+  $(".loader-wrapper").fadeOut("slow");
+ });

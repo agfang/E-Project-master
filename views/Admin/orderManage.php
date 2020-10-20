@@ -21,6 +21,7 @@
     <!--     Fonts and icons     -->
     <link href="../../templates/dashboard/assets/css/font-awesome.css" rel="stylesheet" />
     <link href="../../templates/dashboard/assets/css/google-roboto-300-700.css" rel="stylesheet" />
+    <link href="../../utilities/AdminStyle.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -332,7 +333,7 @@
         return status;
     }
     $(document).ready(function() {
-        
+
         get_record("","getOrderRecord");
         createTable(datasource);
 
