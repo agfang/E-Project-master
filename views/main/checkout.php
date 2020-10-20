@@ -31,7 +31,7 @@
 				$query = mysqli_query($conn,$sql);
 			} 
 			// Save cart -> order
-			$sql = "INSERT INTO `order`(`OrderID`, `UserID`,`Address`,`Phone`, `CreateTime`, `OrderStatus`,`Payment`,`TotalPrice`) VALUES ('$orderID','$userID','$address','$phone','$createTime','$status','$payment','$totalprice')";
+			$sql = "INSERT INTO `orders`(`OrderID`, `UserID`,`Address`,`Phone`, `CreateTime`, `OrderStatus`,`Payment`,`TotalPrice`) VALUES ('$orderID','$userID','$address','$phone','$createTime','$status','$payment','$totalprice')";
 			$query = mysqli_query($conn,$sql); 
 			//Update user info
 			if(isset($_POST['checkbox']) && !empty($_POST['checkbox'])){
