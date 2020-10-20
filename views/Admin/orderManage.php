@@ -171,7 +171,7 @@
         <div class="card card-signup card-plain">
           <div class="modal-header">
             <div class="card-header card-header-danger text-center">
-                <h4 class="card-title">Delete Product</h4>
+                <h4 class="card-title">Cancel Order</h4>
             </div>
           </div>
         </div>
@@ -271,7 +271,12 @@
     // ajax fetch data function
     function createTable(data){
         for (var i = 0; i < data.length;i++){
+            var disabled = "";
             var status = setStatusLabel(data[i]["OrderStatus"]);
+            if(data[i]["OrderStatus"] == "Completed" || data[i]["OrderStatus"] == "Cancel"){
+                disabled="disabled";
+                console.log(disabled)
+            }
         $('#datatables tbody').append(`
         <tr>
           <td>${data[i]["OrderID"]}</td>
@@ -286,8 +291,8 @@
           <td>${data[i]["Payment"]}</td>
           <td>${data[i]["TotalPrice"]}</td>
           <td>
-              <a href="#" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#editModal"><i class="material-icons">skip_next</i></a>
-              <a href="#" class="btn btn-simple btn-danger btn-icon remove" data-toggle="modal" data-target="#deleteModal"><i class="material-icons">close</i></a>
+              <a href="#" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#editModal" ${disabled}><i class="material-icons">skip_next</i></a>
+              <a href="#" class="btn btn-simple btn-danger btn-icon remove" data-toggle="modal" data-target="#deleteModal" ${disabled}><i class="material-icons">close</i></a>
           </td>
         </tr>`);
         }
@@ -312,7 +317,7 @@
     function nextStatus(status){
 
         if(status == "Waiting") status = "Shipping";
-        else if(status == "Shipping") status = "Complate"
+        else if(status == "Shipping") status = "Completed"
         return status;
     }
     function setStatusLabel(status){
@@ -323,8 +328,8 @@
             case "Shipping":
                 status = '<span class="label label-info">Shipping</span>';
                 break;
-            case "Complate":
-                status = '<span class="label label-success">Complate</span>';
+            case "Completed":
+                status = '<span class="label label-success">Completed</span>';
                 break;
             case "Cancel":
                 status = '<span class="label label-danger">Cancel</span>';
@@ -358,7 +363,6 @@
             selectedRow  = table.row($tr).index();
             var tempDiv = document.createElement('div');
             tempDiv.innerHTML=data[6];
-            console.log(tempDiv.innerText);
             var status = nextStatus(tempDiv.innerText);
             $("#orderUpdatedId").val(data[0]);
             $("#orderUpdatedName").text(data[0]);
@@ -381,13 +385,18 @@
 				{
 					if(data == 1){
                         get_record($("#orderUpdatedId").val(),"getOrderRecord");
-                        demo.showSwal('success-message');
+                        NotificationSucces(`Order ${id}' status is changed successfully`);
                         $('#closeUpdate').trigger('click');
                         var newStatus=setStatusLabel(datasource[0]["OrderStatus"])
                         table.cell({row:selectedRow, column:6}).data( newStatus ).draw(false);
+                        if(datasource[0]["OrderStatus"] == "Completed"){
+                            var newBtn = `<a href="#" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#editModal" disabled><i class="material-icons">skip_next</i></a>
+                                    <a href="#" class="btn btn-simple btn-danger btn-icon remove" data-toggle="modal" data-target="#deleteModal" disabled><i class="material-icons">close</i></a>`
+                            table.cell({row:selectedRow, column:9}).data( newBtn ).draw(false);
+                        }
                     }
                     else if (data == 0){
-                        demo.showSwal('error');
+                        NotificationError();
                     }
                 },
                 cache: false,
@@ -421,14 +430,16 @@
 				{
 					if(data == 1){
                         get_record($("#orderUpdatedId").val(),"getOrderRecord");
-                        demo.showSwal('success-message');
+                        NotificationSucces(`Order ${id}'  is canceled successfully`);
                         $('#closeCancel').trigger('click');
                         var newStatus=setStatusLabel(datasource[0]["OrderStatus"])
-                        console.log(newStatus);
+                        var newBtn = `<a href="#" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#editModal" disabled><i class="material-icons">skip_next</i></a>
+                                    <a href="#" class="btn btn-simple btn-danger btn-icon remove" data-toggle="modal" data-target="#deleteModal" disabled><i class="material-icons">close</i></a>`
                         table.cell({row:selectedRow, column:6}).data( newStatus ).draw(false);
+                        table.cell({row:selectedRow, column:9}).data( newBtn ).draw(false);
                     }
                     else {
-                        demo.showSwal('error');
+                        NotificationError();
                     }
                 },
                 cache: false,

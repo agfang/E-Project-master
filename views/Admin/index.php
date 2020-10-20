@@ -49,7 +49,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"> Create New Product </a>
+                        <a class="navbar-brand" href="#"> Dashboard </a>
                     </div>
 
                 </div>
@@ -58,49 +58,164 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-
-                            <!--  end card  -->
+                            <div class="card">
+                                <div class="card-header card-header-icon" data-background-color="green">
+                                    <i class="material-icons">language</i>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="card-title">Global Goal</h4>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="table-responsive table-sales">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flag">
+                                                                    <img src="../../templates/dashboard/assets/img/flags/US.png">
+                                                                </div>
+                                                            </td>
+                                                            <td>USA</td>
+                                                            <td class="text-right">
+                                                                2021
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flag">
+                                                                    <img src="../../templates/dashboard/assets/img/flags/DE.png">
+                                                                </div>
+                                                            </td>
+                                                            <td>Germany</td>
+                                                            <td class="text-right">
+                                                                2022
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flag">
+                                                                    <img src="../../templates/dashboard/assets/img/flags/AU.png">
+                                                                </div>
+                                                            </td>
+                                                            <td>Australia</td>
+                                                            <td class="text-right">
+                                                               2022
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flag">
+                                                                    <img src="../../templates/dashboard/assets/img/flags/GB.png">
+                                                                </div>
+                                                            </td>
+                                                            <td>United Kingdom</td>
+                                                            <td class="text-right">
+                                                                2023
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flag">
+                                                                    <img src="../../templates/dashboard/assets/img/flags/RO.png">
+                                                                </div>
+                                                            </td>
+                                                            <td>Romania</td>
+                                                            <td class="text-right">
+                                                                2023
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flag">
+                                                                    <img src="../../templates/dashboard/assets/img/flags/BR.png">
+                                                                </div>
+                                                            </td>
+                                                            <td>Brasil</td>
+                                                            <td class="text-right">
+                                                                2024
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-1">
+                                            <div id="worldMap" class="map"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- end col-md-12 -->
                     </div>
-                    <!-- end row -->
+                    
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">view_list</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Order</p>
+                                    <h3 class="card-title" id="totalOrder">0</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">update</i> Just Updated
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="rose">
+                                    <i class="material-icons">category</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Products</p>
+                                    <h3 class="card-title" id="totalProducts">0</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">update</i> Just Updated
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">store</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Revenue</p>
+                                    <h3 class="card-title" id="Revenue">$0</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">update</i> Just Updated
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="material-icons">account_circle</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">User</p>
+                                    <h3 class="card-title" id="totalUser">0</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">update</i> Just Updated
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>>
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <p class="copyright pull-right">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
-                        <a href="http://www.creative-tim.com/">Creative Tim</a>, made with love for a better web
-                    </p>
-                </div>
-            </footer>
         </div>
     </div>
 </body>
@@ -149,8 +264,33 @@
 <!-- Admin Side Bar  -->
 <script src="../../utilities/adminSidebar.js"></script>
 <script type="text/javascript">
-
+    var datasource=0;
+    function get_record(action)
+        {
+            $.ajax(
+                {
+                    url: 'control.php',
+                    method: 'get',
+                    async: false,
+                    data:{
+                        "action": action, 
+                    },
+                    success: function(data)
+                    {
+                        datasource = data;
+                    }
+                });
+        }
     $(document).ready(function() {
+        get_record("getTotalOrder");
+        $("#totalOrder").text(datasource);
+        get_record("getTotalProducts");
+        $("#totalProducts").text(datasource);
+        get_record("getRevenue");
+        $("#Revenue").text(datasource);
+        get_record("getTotalUser");
+        $("#totalUser").text(datasource);
+        demo.initVectorMap();
         if (typeof(Storage) !== "undefined") {
                 var login = sessionStorage.getItem("loginsuccess");
                 if(login != "1")  location.replace("http://localhost:81/E-Project-master/views/Admin/login.php");

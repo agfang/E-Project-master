@@ -240,11 +240,11 @@
 				{
                     console.log(data);
 					if(data == 1){
-                        demo.showSwal('success-message');
+                        NotificationSucces(`Product ${name} is created successfully`);
                         $("#reset").click();
                     }
                     else if (data == 0){
-                        demo.showSwal('error');
+                        NotificationError();
                     }
                 },
                 cache: false,

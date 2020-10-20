@@ -316,7 +316,7 @@
 <script type="text/javascript">
     var datasource = null;
     var selectedRow = -1;
-    // ajax fetch data function
+// ajax fetch data function
     function createTable(data){
         for (var i = 0; i < data.length;i++){
         $('#datatables tbody').append(`
@@ -355,7 +355,6 @@
                 }
             });
     }
-
     $(document).ready(function() {
         get_record();
         createTable(datasource);
@@ -394,7 +393,7 @@
             }
         }
         });
-        //ajax update product function
+    //ajax update product function
         $('#editProduct').on('submit', function(event){
             event.preventDefault();
             var id= $("#prodUpdatedId").val();
@@ -423,7 +422,7 @@
 				{
 					if(data == 1){
                         get_record();
-                        //demo.showSwal('success-message');
+                        NotificationSucces(`Product ${name} is updated successfully`);
                         var newData = [datasource[0]["ProductID"],datasource[0]["ProductName"],
                                     `<a href="#" class="btn btn-simple btn-info btn-icon img" name="${datasource[0]['Image']}" data-toggle="modal" data-target="#imageModal"><i class="material-icons">collections</i></a>`,
                                     datasource[0]["Price"],
@@ -438,6 +437,7 @@
                         $('#closeEdit').trigger('click');
                     }
                     else if (data == 0){
+                        NotificationError();
                         demo.showSwal('error');
                     }
                 },
@@ -447,7 +447,7 @@
 			});
         });
 
-        // Delete a record
+    // Delete a record
         table.on('click', '.remove', function(e) {
             $tr = $(this).closest('tr');
             var data = table.row($tr).data();
@@ -470,12 +470,12 @@
 				success:function(data)
 				{
 					if(data == 1){
-                        demo.showSwal('success-message');
+                        NotificationSucces(`Product ${name} is deleted successfully`);
                         table.row(selectedRow).remove().draw(false);
                         $("#closeDelete").trigger('click');
                     }
                     else if (data == 0){
-                        demo.showSwal('error');
+                        NotificationError();
                     }
                 },
                 cache: false,
@@ -485,7 +485,7 @@
         });
 
 
-        //Show image record
+    //Show image record
         table.on('click', '.img', function() {
             $tr = $(this).closest('tr');
             var data = table.row($tr).data();

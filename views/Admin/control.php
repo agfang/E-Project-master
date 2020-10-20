@@ -127,6 +127,34 @@
           array_push($data,$row);
         }
       }
+      else if($action == 'getTotalOrder'){
+        $sqlCmd="SELECT COUNT(*) FROM eproject1.orders;";
+        $result = mysqli_query($conn,$sqlCmd); 
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo $row;
+        }
+      }
+      else if($action == 'getTotalProducts'){
+        $sqlCmd="SELECT COUNT(*) FROM eproject1.products;";
+        $result = mysqli_query($conn,$sqlCmd);
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo $row;
+        }
+      }
+      else if($action == 'getRevenue'){
+        $sqlCmd="SELECT ROUND(SUM(TotalPrice),2) FROM eproject1.orders;";
+        $result = mysqli_query($conn,$sqlCmd); 
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo $row;
+        }
+      }
+      else if($action == 'getTotalUser'){
+        $sqlCmd="SELECT COUNT(*) FROM eproject1.users;";
+        $result = mysqli_query($conn,$sqlCmd); 
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo $row;
+        }
+      }
     $jsonData = json_encode($data);
     echo $jsonData;
   }

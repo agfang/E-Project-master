@@ -71,6 +71,38 @@ function setActiveTab(){
     }
   });
 }
+//show notification
+function NotificationSucces(mess){
+
+$.notify({
+    icon: "notifications",
+    message: `<b>Success!</b> ${mess}.`
+
+  },{
+      type: 'success',
+      timer: 3000,
+      placement: {
+        from: "top",
+        align: "right"
+      }
+  });
+}
+
+function NotificationError(){
+
+$.notify({
+    icon: "error",
+    message: " <b>Oop!</b> Something error, Contact a technician to fix it."
+
+  },{
+      type: 'danger',
+      timer: 3000,
+      placement: {
+          from: "top",
+          align: "right"
+      }
+  });
+}
 
 $(document).ready(function() {
   $("body").append(`
@@ -87,16 +119,14 @@ $(document).ready(function() {
 //Show loading when call ajax function
   $(document).ajaxStart(function()
   {
-      console.log(1)
       $(".loader-wrapper").fadeIn();
   });
   $(document).ajaxComplete(function()
   {
-      console.log(2)
-      $(".loader-wrapper").fadeOut();
+     $(".loader-wrapper").fadeOut('slow');
   });
 })
-//Show loading page
+//Show loading when loading page
 $(window).on("load",function(){
   $(".loader-wrapper").fadeOut("slow");
- });
+});
