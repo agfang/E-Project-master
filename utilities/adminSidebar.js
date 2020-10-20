@@ -1,4 +1,7 @@
-<div class="logo">
+
+function createSideBar() {
+  $("#sidebar").append(
+    `<div class="logo">
     <a href="./index.php" class="simple-text">
         START ORGANIC
     </a>
@@ -28,21 +31,50 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="./Product.php">
-          <i class="material-icons">table_view</i>
+          <i class="material-icons">subject</i>
           <p>All Products</p>
         </a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item ">
         <a class="nav-link" href="./CreateProduct.php">
           <i class="material-icons">add_box</i>
           <p>Add Product</p>
         </a>
       </li>
-      <li class="nav-item ">
+      <li class="nav-item">
         <a class="nav-link" href="./orderManage.php">
           <i class="material-icons">list_alt</i>
           <p>Order Manage</p>
         </a>
       </li>
+      <li class="nav-item" id="Logout">
+        <a class="nav-link" href="./login.php">
+          <i class="material-icons">exit_to_app</i>
+          <p>Logout</p>
+        </a>
+      </li>
     </ul>
-</div>
+</div>`
+  )
+}
+function setActiveTab(){
+  var href = document.location.href;
+  var lastPathSegment = href.substr(href.lastIndexOf('/'));
+  console.log(lastPathSegment)
+  if(lastPathSegment=="/"){
+    $('.nav-item')[0].setAttribute('class','nav-item active');
+  }
+  $.each($('.nav-item'), function() {
+    var currentHref = this.firstElementChild.getAttribute('href').substr(1);
+    if (currentHref == lastPathSegment){
+      this.setAttribute('class','nav-item active');
+    }
+  });
+}
+$(document).ready(function() {
+  createSideBar();
+  setActiveTab();
+  $("#Logout").click(function(){
+    sessionStorage.removeItem('loginsuccess');
+  })
+})

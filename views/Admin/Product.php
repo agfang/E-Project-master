@@ -25,60 +25,12 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-active-color="rose" data-background-color="white" data-image="">
+        <div class="sidebar" data-active-color="rose" data-background-color="white" data-image="" id="sidebar">
             <!--
         Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
         Tip 2: you can also add an image using data-image tag
         Tip 3: you can change the color of the sidebar with data-background-color="white | black"
     -->
-            <div class="logo">
-                <a href="http://www.creative-tim.com/" class="simple-text">
-                    START ORGANIC
-                </a>
-            </div>
-            <div class="logo logo-mini">
-                <a href="http://www.creative-tim.com/" class="simple-text">
-                    Ct
-                </a>
-            </div>
-            <div class="sidebar-wrapper">
-                <div class="user">
-                    <div class="photo">
-                        <img src="../../templates/dashboard/assets/img/faces/avatar.jpg" />
-                    </div>
-                    <div class="info">
-                        <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                            Admin
-                        </a>
-                    </div>
-                </div>
-                <ul class="nav">
-                  <li class="nav-item   ">
-                    <a class="nav-link" href="./index.php">
-                      <i class="material-icons">dashboard</i>
-                      <p>Dashboard</p>
-                    </a>
-                  </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="./Product.php">
-                      <i class="material-icons">table_view</i>
-                      <p>All Products</p>
-                    </a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link" href="./CreateProduct.php">
-                      <i class="material-icons">add_box</i>
-                      <p>Add Product</p>
-                    </a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link" href="./orderManage.php">
-                      <i class="material-icons">list_alt</i>
-                      <p>Order Manage</p>
-                    </a>
-                  </li>
-                </ul>
-            </div>
         </div>
         <div class="main-panel">
             <nav class="navbar navbar-transparent navbar-absolute">
@@ -358,6 +310,8 @@
 <script src="../../templates/dashboard/assets/js/material-dashboard.js"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="../../templates/dashboard/assets/js/demo.js"></script>
+<!-- Admin Side Bar  -->
+<script src="../../utilities/adminSidebar.js"></script>
 <script type="text/javascript">
     var datasource = null;
     var selectedRow = -1;
