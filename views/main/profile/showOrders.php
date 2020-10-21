@@ -4,13 +4,13 @@ session_start();
 $tempUser = $_SESSION['UserInfo']['UserID'];
 $getOrdersSql = 
 "SELECT `products`.`ProductName`, `orderdetail`.`Price`, `orderdetail`.`Quantity` 
-FROM `order`
+FROM `orders`
 JOIN `orderdetail`
-	ON `orderdetail`.`OrderID` = `order`.`OrderID`
+	ON `orderdetail`.`OrderID` = `orders`.`OrderID`
 JOIN `products`
 	ON `products`.`ProductID` = `orderdetail`.`ProductID`
-    WHERE `order`.`UserID` = '$tempUser'
-    ORDER BY `order`.`Time` DESC
+    WHERE `orders`.`UserID` = '$tempUser'
+    ORDER BY `orders`.`CreateTime` DESC
     LIMIT 15    
 ";
 

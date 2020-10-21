@@ -15,13 +15,14 @@
 			$totalprice = 0; 
 			$orderID = "SOF".time();
 			$userID = $_SESSION['UserInfo']['UserID'];
-			$time = date('Y-m-d H:i:s');
-			$status = "Shipping";
+			$createTime = date('Y-m-d H:i:s');
+			$status = "Waiting";
 			
 			foreach($_SESSION['cart'] as $id => $value) { 
 				$price = $value['price']*(1-$value['discount']);
 				$quantity = $value['quantity'];
 				$totalprice += $price * $quantity*1.1;
+				// Update orderdetail
 				$sql = "INSERT INTO `orderdetail`(`OrderID`, `ProductID`, `Price`, `Quantity`) VALUES ('$orderID','$id','$price','$quantity')";
 				$query = mysqli_query($conn,$sql);
 
@@ -30,7 +31,7 @@
 				$query = mysqli_query($conn,$sql);
 			} 
 			// Save cart -> order
-			$sql = "INSERT INTO `order`(`OrderID`, `UserID`,`Address`,`Phone`, `Time`, `Status`,`Payment`,`TotalAmount`) VALUES ('$orderID','$userID','$address','$phone','$time','$status','$payment','$totalprice')";
+			$sql = "INSERT INTO `orders`(`OrderID`, `UserID`,`Address`,`Phone`, `CreateTime`, `OrderStatus`,`Payment`,`TotalPrice`) VALUES ('$orderID','$userID','$address','$phone','$createTime','$status','$payment','$totalprice')";
 			$query = mysqli_query($conn,$sql); 
 			//Update user info
 			if(isset($_POST['checkbox']) && !empty($_POST['checkbox'])){
@@ -276,7 +277,7 @@
 				</p>
 
 				<p class="d-flex">
-					<span>Status</span>
+					<span>Order Status</span>
 					<span><?php echo $status; ?></span>
 				</p>
 
