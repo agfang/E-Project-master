@@ -105,7 +105,6 @@ $.notify({
 }
 
 function checkIsLogined(){
-  console.log(1)
   if (typeof(Storage) !== "undefined") {
           console.log(1)
           var login = sessionStorage.getItem("loginsuccess");
@@ -116,6 +115,7 @@ function checkIsLogined(){
 
 $(document).ready(function() {
   checkIsLogined();
+  
   $("body").append(`
   <div class="loader-wrapper">
     <span class="loader"><span class="loader-inner"></span></span>
