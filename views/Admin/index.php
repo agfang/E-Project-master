@@ -147,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                <!--   Thong ke so luong  -->  
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="card card-stats">
@@ -213,7 +213,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>>
+                    </div>
                 </div>
             </div>
         </div>
@@ -277,19 +277,19 @@
                     },
                     success: function(data)
                     {
-                        datasource = data;
+                        datasource = JSON.parse(data);
                     }
                 });
         }
     $(document).ready(function() {
         get_record("getTotalOrder");
-        $("#totalOrder").text(datasource);
+        $("#totalOrder").text(datasource[0]["totalOrder"]);
         get_record("getTotalProducts");
-        $("#totalProducts").text(datasource);
+        $("#totalProducts").text(datasource[0]["totalProduct"]);
         get_record("getRevenue");
-        $("#Revenue").text(datasource);
+        $("#Revenue").text("$"+datasource[0]["Revenue"]);
         get_record("getTotalUser");
-        $("#totalUser").text(datasource);
+        $("#totalUser").text(datasource[0]["totalUser"]);
         demo.initVectorMap();
         if (typeof(Storage) !== "undefined") {
                 var login = sessionStorage.getItem("loginsuccess");
