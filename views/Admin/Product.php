@@ -22,11 +22,16 @@
     <link href="../../templates/dashboard/assets/css/font-awesome.css" rel="stylesheet" />
     <link href="../../templates/dashboard/assets/css/google-roboto-300-700.css" rel="stylesheet" />
     <link href="../../utilities/AdminStyle.css" rel="stylesheet" />
+    <style>
+        .form-group{
+            margin-top:10px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-active-color="rose" data-background-color="white" data-image="" id="sidebar">
+        <div class="sidebar" data-active-color="green" data-background-color="white" data-image="" id="sidebar">
             <!--
         Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
         Tip 2: you can also add an image using data-image tag
@@ -97,121 +102,115 @@
                     <!-- end row -->
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <p class="copyright pull-right">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
-                        <a href="http://www.creative-tim.com/">Creative Tim</a>, made with love for a better web
-                    </p>
-                </div>
-            </footer>
         </div>
     </div>
     <!-- MODAL START -->
 
 <!-- MODAL edit -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" >
-      <div class="modal-dialog " role="document">
+      <div class="modal-dialog " role="document" style="width:60%">
           <div class="modal-content">
-            <div class="card card-signup">
-                <form id="editProduct" class="form-edit" action="#" method="post" enctype="multipart/form-data">
+            <div class="card card-signup" >
+                <form id="editProduct" class="form-horizontal form-edit" action="#" method="post" enctype="multipart/form-data">
                     <div class="card-header card-header-icon" data-background-color="orange">
                         <i class="material-icons">edit</i>
                     </div>
                     <div class="card-content">
                         <h4 class="card-title">Update Product</h4>
-                        <div style="margin-left:5%; width:90%">
-                            <input class="form-control" id="prodUpdatedId" type="hidden"/>
-                            <div class="form-group ">
-                                <input class="form-control" id="name" type="text" required="true" placeholder="Product Name"/>
+                        <div class="row" style="margin-top:5rem;">
+                        <div class="col-md-5" style="text-align: center">
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="../../templates/dashboard/assets/img/image_placeholder.jpg" alt="Star Organic" id="productImg" >
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-rose btn-round btn-file">
+                                        <span class="fileinput-new">Select image</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" id="inputImg" />
+                                    </span>
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                </div>
                             </div>
-                            <div class="form-group ">
-                                <input class="form-control" id="price" type="number" required="true" placeholder="Price"/>
                             </div>
-                            <div class="form-group ">
-                                <input class="form-control" id="discount" type="text" required="true" placeholder="Discount"/>
-                            </div>
-                            <div class="form-group ">
-                                <input class="form-control" id="amount" type="number" required="true" placeholder="Amount"/>
-                            </div>
-                            <div class="form-group ">
-                                <textarea class="form-control" id="desc"  rows="3" placeholder="Description"></textarea>
-                            </div>
-                            <div class="form-group">
-                            <div class="row">
-                            <div class="col-sm-6 ">
-                                <legend>Product Image</legend>
-                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img src="../../templates/dashboard/assets/img/image_placeholder.jpg" alt="Star Organic" id="productImg" style="max-height:14rem">
-                                    </div>
-                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                    <div>
-                                        <span class="btn btn-rose btn-round btn-file">
-                                            <span class="fileinput-new">Select image</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input type="file" id="inputImg" />
-                                        </span>
-                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            <div class="col-md-7" style="border-left: 1px solid #c9c9c9;">
+                                <div class="row">
+                                    <label class="col-md-2 label-on-left">Name</label>
+                                    <div class="col-md-10">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label"></label>
+                                            <input class="form-control" id="name" type="text" required="true" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-5 checkbox-radios col-sm-offset-1">
-                                <legend>Product Type</legend>
-                                <div class="radio">
-                                    <label>
-                                        <input class="form-check-input" type="radio" name="prodType" value="Vegetables" required> Vegetables
-                                    </label>
+                                <div class="row">
+                                    <label class="col-md-2 label-on-left">Price</label>
+                                    <div class="col-md-10">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label"></label>
+                                            <input class="form-control" id="price" type="number" required="true" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="radio">
-                                    <label>
-                                        <input class="form-check-input" type="radio" name="prodType" value="Fruits" required> Fruits
-                                    </label>
+                                <div class="row">
+                                    <label class="col-md-2 label-on-left">Discount</label>
+                                    <div class="col-md-10">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label"></label>
+                                            <input class="form-control" id="discount" type="text" required="true"/>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="radio">
-                                    <label>
-                                        <input class="form-check-input" type="radio" name="prodType" value="Dried" required> Dried
-                                    </label>
+                                <div class="row">
+                                    <label class="col-md-2 label-on-left">Amount</label>
+                                    <div class="col-md-10">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label"></label>
+                                            <input class="form-control" id="amount" type="number" required="true" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="radio">
-                                    <label>
-                                        <input class="form-check-input" type="radio" name="prodType" value="Juice" required> Juice
-                                    </label>
+                                <div class="row">
+                                    <label class="col-md-2 label-on-left">Description</label>
+                                    <div class="col-md-10">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label"></label>
+                                            <textarea class="form-control" id="desc"  rows="2" ></textarea>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <label class="col-md-2 label-on-left">Type</label>
+                                    <div class="col-md-10" style="margin-top:1.5rem;">
+                                        <div class="radio col-sm-3">
+                                            <label>
+                                                <input class="form-check-input" type="radio" name="prodType" value="Vegetables" required> Vegetables
+                                            </label>
+                                        </div>
+                                        <div class="radio col-sm-2">
+                                            <label>
+                                                <input class="form-check-input" type="radio" name="prodType" value="Fruits" required> Fruits
+                                            </label>
+                                        </div>
+                                        <div class="radio col-sm-2">
+                                            <label>
+                                                <input class="form-check-input" type="radio" name="prodType" value="Dried" required> Dried
+                                            </label>
+                                        </div>
+                                        <div class="radio col-sm-2">
+                                            <label>
+                                                <input class="form-check-input" type="radio" name="prodType" value="Juice" required> Juice
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input class="form-control" id="prodUpdatedId" type="hidden"/>
                             </div>
-                            </div>
-                            </div>
+                        </div>
                         <div class="card-footer text-center">
                             <button type="reset" class="btn btn-default btn-fill" data-dismiss="modal" id="closeEdit">Close</button>
                             <button type="submit" class="btn btn-success btn-fill" id="submit">Update</button>
-                        </div>
                         </div>
                     </div>
                 </form>

@@ -26,7 +26,7 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-active-color="rose" data-background-color="white" data-image="" id="sidebar">
+        <div class="sidebar" data-active-color="green" data-background-color="white" data-image="" id="sidebar">
             <!--
         Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
         Tip 2: you can also add an image using data-image tag
@@ -99,44 +99,9 @@
                     <!-- end row -->
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <p class="copyright pull-right">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
-                        <a href="http://www.creative-tim.com/">Creative Tim</a>, made with love for a better web
-                    </p>
-                </div>
-            </footer>
         </div>
     </div>
-    <!-- MODAL START -->
+<!-- MODAL START -->
 
 <!-- MODAL update status -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog">

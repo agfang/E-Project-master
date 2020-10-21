@@ -16,12 +16,12 @@
     <link href="../../templates/dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
     <!--  Material Dashboard CSS    -->
     <link href="../../templates/dashboard/assets/css/material-dashboard.css" rel="stylesheet" />
+    <link href="../../utilities/AdminStyle.css" rel="stylesheet" />
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="../../templates/dashboard/assets/css/demo.css" rel="stylesheet" />
     <!--     Fonts and icons     -->
     <link href="../../templates/dashboard/assets/css/font-awesome.css" rel="stylesheet" />
     <link href="../../templates/dashboard/assets/css/google-roboto-300-700.css" rel="stylesheet" />
-    <link href="../../utilities/AdminStyle.css" rel="stylesheet" />
     <style>
         .form-group.label-floating{
             margin-top:10px;
@@ -31,7 +31,7 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-active-color="rose" data-background-color="white" data-image="" id="sidebar">
+        <div class="sidebar" data-active-color="green" data-background-color="white" data-image="" id="sidebar">
             <!--
         Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
         Tip 2: you can also add an image using data-image tag
@@ -90,7 +90,7 @@
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Description</label>
-                                                <textarea class="form-control" id="desc"  rows="3"></textarea>
+                                                <textarea class="form-control" id="desc"  rows="2"></textarea>
                                             </div>
                                             <div class="form-group">
                                             <div class="row">
