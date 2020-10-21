@@ -11,7 +11,7 @@
             $prodAmount=$_POST['amount'];
             $prodDesc=$_POST['desc'];
             $prodPrice=$_POST['price'];
-            if(isset($_POST['discount'])){
+            if(isset($_POST['discount']) && $_POST['discount']!= ""){
               $discount=$_POST['discount'];
             }
             $prodType=$_POST['prodType'];

@@ -71,14 +71,15 @@
                                     </div>
                                     <div class="card-content">
                                         <h4 class="card-title">Create New Product</h4>
+                                        <p style="display:none; color:#f44336;margin-left: 45%;" id="title-error">Please fill all fields have *</p>
                                         <div style="margin-left:10%; width:80%">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Product Name<small>*</small></label>
-                                                <input class="form-control" id="name" type="text" required="true" />
+                                                <input class="form-control" id="name" type="text"  />
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Price<small>*</small></label>
-                                                <input class="form-control" id="price" type="number" required="true" />
+                                                <input class="form-control" id="price" type="number"  />
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Discount<small>*</small></label>
@@ -86,7 +87,7 @@
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Amount<small>*</small></label>
-                                                <input class="form-control" id="amount" type="number" required="true" />
+                                                <input class="form-control" id="amount" type="number" />
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Description</label>
@@ -95,7 +96,7 @@
                                             <div class="form-group">
                                             <div class="row">
                                             <div class="col-sm-6 col-sm-offset-1">
-                                                <legend>Product Image</legend>
+                                                <legend id="prodImg-title">Product Image *</legend>
                                                 <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail">
                                                         <img src="../../templates/dashboard/assets/img/image_placeholder.jpg" alt="...">
@@ -111,26 +112,26 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-5 checkbox-radios">
-                                                <legend>Product Type</legend>
+                                            <div class="col-sm-5 checkbox-radios ">
+                                                <legend id="radio-title">Product Type *</legend>
                                                 <div class="radio">
                                                     <label>
-                                                        <input class="form-check-input" type="radio" name="prodType" value="Vegetables" required> Vegetables
+                                                        <input class="form-check-input" type="radio" name="prodType" value="Vegetables" > Vegetables
                                                     </label>
                                                 </div>
                                                 <div class="radio">
                                                     <label>
-                                                        <input class="form-check-input" type="radio" name="prodType" value="Fruits" required> Fruits
+                                                        <input class="form-check-input" type="radio" name="prodType" value="Fruits" > Fruits
                                                     </label>
                                                 </div>
                                                 <div class="radio">
                                                     <label>
-                                                        <input class="form-check-input" type="radio" name="prodType" value="Dried" required> Dried
+                                                        <input class="form-check-input" type="radio" name="prodType" value="Dried" > Dried
                                                     </label>
                                                 </div>
                                                 <div class="radio">
                                                     <label>
-                                                        <input class="form-check-input" type="radio" name="prodType" value="Juice" required> Juice
+                                                        <input class="form-check-input" type="radio" name="prodType" value="Juice" > Juice
                                                     </label>
                                                 </div>
                                             </div>
@@ -203,16 +204,8 @@
 <script src="../../utilities/adminSidebar.js"></script>
 <script type="text/javascript">
 
-    function setFormValidation(id) {
-        $(id).validate({
-            errorPlacement: function(error, element) {
-                $(element).parent('div').addClass('has-error');
-            }
-        });
-    }
 
     $(document).ready(function() {
-        setFormValidation('#createProduct');
 
         $('#createProduct').on('submit', function(event){
             event.preventDefault();
@@ -223,34 +216,57 @@
             var amount = $("#amount").val();
             var desc = $("#desc").val();
             var prodType = $("input[name='prodType']:checked").val();
-            var formData = new FormData();
-            formData.append('inputImg', file_data);
-            formData.append('name', name);
-            formData.append('price', price);
-            formData.append('discount', discount);
-            formData.append('amount', amount);
-            formData.append('desc', desc);
-            formData.append('prodType', prodType);
-            formData.append('action', 'create');
-            $.ajax({
-				url:"control.php",
-				method:"POST",
-				data:formData,
-				success:function(data)
-				{
-                    console.log(data);
-					if(data == 1){
-                        NotificationSucces(`Product ${name} is created successfully`);
-                        $("#reset").click();
-                    }
-                    else if (data == 0){
-                        NotificationError();
-                    }
-                },
-                cache: false,
-                contentType: false,
-                processData: false
-			});
+            if(name == ""){
+                $("#name").parent('div').addClass('has-error');
+                $("#title-error").show();
+            }
+            else if (price == ""){
+                $("#price").parent('div').addClass('has-error');
+                $("#title-error").show();
+            }
+            else if (amount == ""){
+                $("#title-error").show();
+                $("#amount").parent('div').addClass('has-error');
+            }
+            else if (prodType == null){
+                $("#radio-title").css('color','#f44336');
+                $("#title-error").show();
+            }
+            else if (file_data == null){
+                $("#prodImg-title").css('color','#f44336');
+                $("#title-error").show();
+            }
+            else{
+                $("#title-error").hide();
+                var formData = new FormData();
+                formData.append('inputImg', file_data);
+                formData.append('name', name);
+                formData.append('price', price);
+                formData.append('discount', discount);
+                formData.append('amount', amount);
+                formData.append('desc', desc);
+                formData.append('prodType', prodType);
+                formData.append('action', 'create');
+                $.ajax({
+			    	url:"control.php",
+			    	method:"POST",
+			    	data:formData,
+			    	success:function(data)
+			    	{
+			    		if(data == 1){
+                            NotificationSucces(`Product ${name} is created successfully`);
+                            $("#reset").click();
+                        }
+                        else {
+                            NotificationError();
+                        }
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+			    });
+            }
+            
         });
 
     });
