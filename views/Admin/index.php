@@ -281,6 +281,7 @@
                     }
                 });
         }
+    
     $(document).ready(function() {
         get_record("getTotalOrder");
         $("#totalOrder").text(datasource[0]["totalOrder"]);
@@ -291,10 +292,7 @@
         get_record("getTotalUser");
         $("#totalUser").text(datasource[0]["totalUser"]);
         demo.initVectorMap();
-        if (typeof(Storage) !== "undefined") {
-                var login = sessionStorage.getItem("loginsuccess");
-                if(login != "1")  location.replace("http://localhost:81/E-Project-master/views/Admin/login.php");
-            }
+        
     });
 </script>
 

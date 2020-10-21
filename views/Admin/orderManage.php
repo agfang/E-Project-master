@@ -240,7 +240,6 @@
             var status = setStatusLabel(data[i]["OrderStatus"]);
             if(data[i]["OrderStatus"] == "Completed" || data[i]["OrderStatus"] == "Cancel"){
                 disabled="disabled";
-                console.log(disabled)
             }
         $('#datatables tbody').append(`
         <tr>

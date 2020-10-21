@@ -355,6 +355,7 @@
             });
     }
     $(document).ready(function() {
+
         get_record();
         createTable(datasource);
 
