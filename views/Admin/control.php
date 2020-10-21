@@ -127,28 +127,22 @@
           array_push($data,$row);
         }
       }
-      else if($action == 'getTotalOrder'){
+      else if($action == 'getDashboard'){
         $sqlCmd="SELECT COUNT(*) AS totalOrder FROM eproject1.orders;";
         $result = mysqli_query($conn,$sqlCmd); 
         while ($row = mysqli_fetch_assoc($result)) {
           array_push($data,$row);
         }
-      }
-      else if($action == 'getTotalProducts'){
         $sqlCmd="SELECT COUNT(*) AS totalProduct FROM eproject1.products;";
         $result = mysqli_query($conn,$sqlCmd);
         while ($row = mysqli_fetch_assoc($result)) {
           array_push($data,$row);
         }
-      }
-      else if($action == 'getRevenue'){
         $sqlCmd="SELECT ROUND(SUM(TotalPrice),2) AS Revenue FROM eproject1.orders;";
         $result = mysqli_query($conn,$sqlCmd); 
         while ($row = mysqli_fetch_assoc($result)) {
           array_push($data,$row);
         }
-      }
-      else if($action == 'getTotalUser'){
         $sqlCmd="SELECT COUNT(*) AS totalUser FROM eproject1.users;";
         $result = mysqli_query($conn,$sqlCmd); 
         while ($row = mysqli_fetch_assoc($result)) {

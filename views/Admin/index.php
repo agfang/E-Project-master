@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../../templates/dashboard/assets/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="../../templates/dashboard/assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Material Dashboard PRO by Creative Tim | Premium Bootstrap Admin Template</title>
+    <title>Star Organic</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -264,33 +264,26 @@
 <!-- Admin Side Bar  -->
 <script src="../../utilities/adminSidebar.js"></script>
 <script type="text/javascript">
-    var datasource=0;
-    function get_record(action)
-        {
-            $.ajax(
+        
+    $(document).ready(function() {
+        $.ajax(
                 {
                     url: 'control.php',
                     method: 'get',
                     async: false,
                     data:{
-                        "action": action, 
+                        "action": "getDashboard", 
                     },
                     success: function(data)
                     {
                         datasource = JSON.parse(data);
+                        $("#totalOrder").text(datasource[0]["totalOrder"]);
+                        $("#totalProducts").text(datasource[1]["totalProduct"]);
+                        $("#Revenue").text("$"+datasource[2]["Revenue"]);
+                        $("#totalUser").text(datasource[3]["totalUser"]);
                     }
                 });
-        }
         
-    $(document).ready(function() {
-        get_record("getTotalOrder");
-        $("#totalOrder").text(datasource[0]["totalOrder"]);
-        get_record("getTotalProducts");
-        $("#totalProducts").text(datasource[0]["totalProduct"]);
-        get_record("getRevenue");
-        $("#Revenue").text("$"+datasource[0]["Revenue"]);
-        get_record("getTotalUser");
-        $("#totalUser").text(datasource[0]["totalUser"]);
         demo.initVectorMap();
     });
 </script>
